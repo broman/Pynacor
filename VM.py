@@ -10,6 +10,13 @@
 #   add r0, 4, r1 
 #   mov sysout, r0
 #   syscall
+
+# Solution:
+# First off, this is hard. Like. HARD
+# Firstly we create a stack and memory array. A counter variable for the program counter, and a flag to see
+#     if the program is running. Then in the run() method we load the program into an array using numpy, ensuring 
+#     the numbers in the array are less than 2 bytes long.
+
 import numpy    # numpy makes loading the binary file extremely easier
 class VM:
     def __init__(self):
@@ -21,7 +28,7 @@ class VM:
                                     # creating a whole new array would be another linear construction
         self.counter = 0            # Program counter. Increment the counter for every operation by the amount of operands
                                     # in an instruction + 1 for the opcode
-        self.is_running = False
+        self.is_running = False     # Flag to check if the "program" is "running"
 
     def run(self):
         self.is_running = True
@@ -47,6 +54,19 @@ class VM:
     def set_r(self): # op 1
         self.memory[self.get_r(1)] = self.get_operand(2)
         self.counter += 3
+
+    def push(self): # op 2
+        self.stack.append(self.get_operand(1))
+        self.counter += 2
+
+    def pop(self): # op 3
+        val = self.stack.pop() # This will error by itself if it's empty thanks to Python
+        self.memory[self.get_r(1)] = val
+        self.counter += 2
+
+    def eq(self): # op 4
+        self.memory[self.get_r(1)] = int(self.get_operand(2) == self.get_operand(3))
+        self.counter += 4
 
     def jmp(self): # op 6
         self.counter = self.get_operand(1)
@@ -76,6 +96,9 @@ class VM:
     opcodes = {
         0: halt,
         1: set_r,
+        2: push,
+        3: pop,
+        4: add,
         6: jmp,
         7: jt,
         8: jf,
