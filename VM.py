@@ -136,6 +136,12 @@ class VM:
         self.stack.append(self.counter + 2)
         self.counter = self.get_operand(1)
 
+    def ret(self):  # op 18
+        if len(self.stack) == 0:
+            self.halt(self)
+        else:
+            self.counter = self.stack.pop()
+
     def out(self):  # op 19
         char = self.get_operand(1)
         print(chr(char), end="")
@@ -163,6 +169,7 @@ class VM:
         15: rmem,
         16: wmem,
         17: call,
+        18: ret,
         19: out,
         21: noop,
     }
