@@ -138,7 +138,7 @@ class VM:
 
     def ret(self):  # op 18
         if len(self.stack) == 0:
-            self.halt(self)
+            self.halt()
         else:
             self.counter = self.stack.pop()
 
