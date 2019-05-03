@@ -103,8 +103,11 @@ class VM:
         # Anyways I Googled it. Just OR it with 2^15 - 1
         self.memory[self.get_r()] = self.get_operand(2) ^ 2**15 - 1
         self.counter += 3
-    def jmp(self): # op 17
-        pass
+
+    def call(self): # op 17
+        self.stack.append(self.counter + 2)
+        self.counter = self.get_operand(1)
+
     def out(self): # op 19
         char = self.get_operand(1)
         print(chr(char), end="")
@@ -127,7 +130,7 @@ class VM:
         12: bit_and,
         13: bit_or,
         14: bit_not,
-        17: jmp,
+        17: call,
         19: out,
         21: noop,
     }
