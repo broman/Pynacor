@@ -1,0 +1,34 @@
+doorway
+north
+north
+bridge
+continue
+down
+east
+take empty lantern
+inv
+west
+west
+passage
+ladder
+west
+south
+north
+take can
+inv
+west
+ladder
+
+use can
+use lantern
+
+darkness
+continue
+west
+west
+west
+west
+north
+
+take red coin
+north
