@@ -11,8 +11,8 @@
 #     the numbers in the array are less than 2 bytes long.
 # After that all we gotta do is execute the instruction at memory[0] and go on.
 # I used a dictionary to help make opcodes easier. So, all we need to do is call the function at opcode[memory[0]]
-import numpy  # numpy makes loading the binary file extremely easier
-
+import numpy    # numpy makes loading the binary file extremely easier
+import sys      # used to take just one single character from stdin
 
 class VM:
     def __init__(self):
@@ -147,6 +147,10 @@ class VM:
         print(chr(char), end="")
         self.counter += 2
 
+    def read(self):  # op 20
+        self.memory[self.get_r()] = ord(sys.stdin.read(1))
+        self.counter += 2
+
     def noop(self):  # op 21
         self.counter += 1
 
@@ -171,6 +175,7 @@ class VM:
         17: call,
         18: ret,
         19: out,
+        20: read,
         21: noop,
     }
 
