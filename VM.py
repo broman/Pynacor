@@ -90,6 +90,17 @@ class VM:
         self.memory[self.get_r()] = tot % 32768
         self.counter += 4
 
+    def mul(self): # op 10
+        # Thanks to stupid MATH we have to cast the multiplicand and multiplier to integers to avoid overflow.
+        prod = int(self.get_operand(2)) * int(self.get_operand(3))
+        self.memory[self.get_r()] = prod % 32768
+        self.counter += 4
+
+    def mod(self): # op 11
+        rem = self.get_operand(2) % self.get_operand(3)
+        self.memory[self.get_r()] = rem
+        self.counter += 4
+
     def bit_and(self): # op 12
         self.memory[self.get_r()] = self.get_operand(2) & self.get_operand(3)
         self.counter += 4
@@ -127,6 +138,8 @@ class VM:
         7: jt,
         8: jf,
         9: add,
+        10: mul,
+        11: mod,
         12: bit_and,
         13: bit_or,
         14: bit_not,
