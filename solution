@@ -32,3 +32,30 @@ north
 
 take red coin
 north
+
+west
+take blue coin
+up
+take shiny coin
+down
+east
+
+east
+take concave coin
+down
+take corroded coin
+up
+west
+
+use blue coin
+use red coin
+use shiny coin
+use concave coin
+use corroded coin
+
+north
+take teleporter
+use teleporter
+
+take business card
+take strange book
