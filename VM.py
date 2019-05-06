@@ -11,8 +11,9 @@
 #     the numbers in the array are less than 2 bytes long.
 # After that all we gotta do is execute the instruction at memory[0] and go on.
 # I used a dictionary to help make opcodes easier. So, all we need to do is call the function at opcode[memory[0]]
-import numpy    # numpy makes loading the binary file extremely easier
-import sys      # used to take just one single character from stdin
+import numpy  # numpy makes loading the binary file extremely easier
+import sys  # used to take just one single character from stdin
+
 
 class VM:
     def __init__(self):
