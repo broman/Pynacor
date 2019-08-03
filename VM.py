@@ -21,14 +21,12 @@ class VM:
         # Makes sense to just use simple arrays for now for time complexity purposes
         # We'll see if they try to send invalid values later.
         self.stack = []  # The stack
-        self.memory = [
-            0
-        ] * 32776  # Register file at 32768, it makes sense to just store the register file here since
-        #     creating a whole new array would be another linear construction
-        self.counter = (
-            0
-        )  # Program counter. Increment the counter for every operation by the amount of operands
-        #     in an instruction + 1 for the opcode
+        self.memory = [0 * 32776]
+        # Register file at 32768, it makes sense to just store the register file here since
+        # creating a whole new array would be another linear construction
+        self.counter = 0
+        # Program counter. Increment the counter for every operation by the amount of operands
+        # in an instruction + 1 for the opcode
         self.is_running = False  # Flag to check if the "program" is "running"
 
     def run(self):
